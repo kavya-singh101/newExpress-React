@@ -37,19 +37,19 @@ const NewsComponent = (props) => {
 
     const handleNext = async () => {
         if (!(page + 1 > Math.ceil(totalResults / props.pageSize))) {
-            await setPage(page + 1)
+            setPage(page + 1)
             upadtePage();
         }
 
     }
     const handlePrev = async () => {
-        await setPage(page - 1)
+        setPage(page - 1)
         upadtePage();
     }
 
     const fetchMoreData = async () => {
-        await setPage(page + 1)
-        const apiUrl = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+        const apiUrl = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
+        setPage(page + 1)
         let data = await fetch(apiUrl);
         let parsedData = await data.json();
         setArticles(articles.concat(parsedData.articles));

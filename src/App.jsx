@@ -8,7 +8,7 @@ import LoadingBar from 'react-top-loading-bar'
 
 const App = () => {
   // greet = "!Have a Good day"
-  const Size = 30;
+  const Size = 6;
   const apiKey = import.meta.env.VITE_REACT_APP_NEWS_API
 
 const [progress,setProgress] = useState(0)
@@ -34,6 +34,7 @@ const [progress,setProgress] = useState(0)
           <Route exact path="/science" element={<NewsComponent setProgress={setProgress} apiKey={apiKey} key={"Science"} pageSize={Size} category={'Science'} />} />
           <Route exact path="/sports" element={<NewsComponent setProgress={setProgress} apiKey={apiKey} key={"Sports"} pageSize={Size} category={'Sports'} />} />
           <Route exact path="/technology" element={<NewsComponent setProgress={setProgress} apiKey={apiKey} key={"Technology"} pageSize={Size} category={'Technology'} />} />
+          <Route exact path="/search" element={<NewsComponent setProgress={setProgress} apiKey={apiKey} key={"search"} pageSize={Size} category={'search'} />} />
         </Routes>
       </Router>
     </div>
