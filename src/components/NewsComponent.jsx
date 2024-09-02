@@ -17,7 +17,7 @@ const NewsComponent = (props) => {
 
     const upadtePage = async () => {
         props.setProgress(10);
-        const apiUrl = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
+        const apiUrl = await `https://newsapi.org/v2/everything?q=${props.category}&apiKey=${props.apiKey}&page=${page}&pageSize=${props.pageSize}`;
         setLoading(true);
         let data = await fetch(apiUrl)
         props.setProgress(30);
@@ -35,20 +35,20 @@ const NewsComponent = (props) => {
         document.title = `NewsExpress - ${props.category}`
     }, [])
 
-    const handleNext = async () => {
-        if (!(page + 1 > Math.ceil(totalResults / props.pageSize))) {
-            setPage(page + 1)
-            upadtePage();
-        }
+    // const handleNext = async () => {
+    //     if (!(page + 1 > Math.ceil(totalResults / props.pageSize))) {
+    //         setPage(page + 1)
+    //         upadtePage();
+    //     }
 
-    }
-    const handlePrev = async () => {
-        setPage(page - 1)
-        upadtePage();
-    }
+    // }
+    // const handlePrev = async () => {
+    //     setPage(page - 1)
+    //     upadtePage();
+    // }
 
     const fetchMoreData = async () => {
-        const apiUrl = `https://newsapi.org/v2/everything?q=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
+        const apiUrl = await `https://newsapi.org/v2/everything?q=${props.category}&apiKey=${props.apiKey}&page=${page+1}&pageSize=${props.pageSize}`;
         setPage(page + 1)
         let data = await fetch(apiUrl);
         let parsedData = await data.json();
@@ -73,11 +73,11 @@ const NewsComponent = (props) => {
                 </div>}>
                 <div className="container">
                     <div className="row ">
-                        {articles.map((element, index) => {
-                            if (!element || !element.title) {
+                        {articles.map((element) => {
+                            if (!element || !element.title || element.url==`https://removed.com`) {
                                 return null; // Skip this element if it is undefined or has no title
                             }
-                            return <div className="col-md-4" key={`${element.url}-${index}`}>
+                            return <div className="col-md-4" key={`${element.url}`}>
                                 <NewsItem
                                     title={element.title ? element.title.slice(0, 70) : ""}
                                     description={element.description ? element.description.slice(0, 150) : ""}
