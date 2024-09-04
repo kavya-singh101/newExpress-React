@@ -11,7 +11,7 @@ const App = () => {
   const Size = 6;
   const apiKey = import.meta.env.VITE_REACT_APP_NEWS_API
 
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(0) 
 
   const [search, setSearch] = useState("");
 
